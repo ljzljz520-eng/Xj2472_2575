@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "metrics": {
+    "production_loc": 2472,
+    "production_files": 34,
+    "production_packages": 9,
+    "test_files": 13,
+    "production_functions": 170,
+    "decision_points": 363
+  },
+  "persistence": {
+    "module": "go.etcd.io/bbolt",
+    "entities": [
+      "Zone",
+      "Device",
+      "TemperatureReading",
+      "TemperatureAlert"
+    ],
+    "reopen_test": "TestPersistenceSurvivesReopen"
+  },
+  "workflows": [
+    {
+      "steps": [
+        "register a cold room and its sensor",
+        "capture a deterministic temperature reading",
+        "evaluate the configured temperature and humidity thresholds",
+        "persist and query the resulting temperature alert"
+      ],
+      "test": "TestWorkflowCaptureCreatesTemperatureAlert"
+    },
+    {
+      "steps": [
+        "load an open temperature alert",
+        "acknowledge the alert as a warehouse operator",
+        "submit the quality inspector decision and note",
+        "persist the review and resolve the alert"
+      ],
+      "test": "TestWorkflowAlertReviewAndResolution"
+    },
+    {
+      "steps": [
+        "record deterministic door-open events",
+        "store the event audit entries",
+        "assemble the zone temperature and humidity series",
+        "query dashboard health and door counts"
+      ],
+      "test": "TestWorkflowDoorEventsAndDashboard"
+    }
+  ]
+}
