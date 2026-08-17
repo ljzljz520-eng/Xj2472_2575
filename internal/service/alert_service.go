@@ -66,6 +66,9 @@ func (s *AlertService) GetAlertSeverity(alertID string) (domain.AlertSeverity, e
 	if err != nil {
 		return "", err
 	}
+	if alert == nil {
+		return "", domain.ErrNotFound
+	}
 	return alert.Severity, nil
 }
 
