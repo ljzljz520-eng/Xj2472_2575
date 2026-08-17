@@ -62,7 +62,7 @@ func (s *AlertService) ReadAlert(alertID string) (*domain.TemperatureAlert, erro
 }
 
 func (s *AlertService) GetAlertSeverity(alertID string) (domain.AlertSeverity, error) {
-	alert, err := s.storage.GetAlert(alertID)
+	alert, err := s.ReadAlert(alertID)
 	if err != nil {
 		return "", err
 	}
